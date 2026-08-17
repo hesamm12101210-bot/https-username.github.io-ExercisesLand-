@@ -1,0 +1,59 @@
+#include <iostream>
+#include <sstream>
+using namespace std;
+
+int main() {
+
+    int numbers[100];
+    int n = 0;
+
+    string line;
+
+    cout << "Enter numbers and press Enter:" << endl;
+    getline(cin, line);
+
+    stringstream input(line);
+
+    // گرفتن تمام اعداد از یک خط
+    while (input >> numbers[n]) {
+        n++;
+    }
+
+    cout << "\nResult:\n";
+
+    // بررسی اعداد
+    for (int i = 0; i < n; i++) {
+
+        bool repeatedBefore = false;
+
+        // آیا قبلاً این عدد را دیده‌ایم؟
+        for (int j = 0; j < i; j++) {
+
+            if (numbers[i] == numbers[j]) {
+                repeatedBefore = true;
+                break;
+            }
+        }
+
+        // اگر قبلاً دیده نشده
+        if (repeatedBefore == false) {
+
+            int count = 0;
+
+            // شمردن تعداد تکرار
+            for (int j = 0; j < n; j++) {
+
+                if (numbers[i] == numbers[j]) {
+                    count++;
+                }
+            }
+
+            cout << numbers[i]
+                 << " -> "
+                 << count
+                 << " times" << endl;
+        }
+    }
+
+    return 0;
+}
